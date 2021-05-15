@@ -7,6 +7,9 @@ RUN apt-get update && apt-get upgrade -y \
 	&& useradd -g users -m ansible
 
 USER ansible
-WORKDIR /home/ansible
-RUN mkdir .ssh && echo "UserKnownHostsFile=/dev/null" > .ssh/config \
-	&& echo "StrictHostKeyChecking=noknown_hosts" >> .ssh/config
+
+RUN mkdir -p /home/ansible/.ssh \
+	&& echo "UserKnownHostsFile=/dev/null" > /home/ansible/.ssh/config \
+	&& echo "StrictHostKeyChecking=noknown_hosts" >> /home/ansible/.ssh/config
+
+WORKDIR /ansible
